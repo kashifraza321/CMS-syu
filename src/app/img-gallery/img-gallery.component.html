@@ -1,0 +1,50 @@
+<section class="faq">
+  <div class="faq-banner">
+    <div class="col-lg-12">
+      <div class="faq-page-header text-center">
+        <h2 class="white-text-2">Image Gallery</h2>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="faq-page-breadcrumb text-center">
+        <a href="" routerLink="/home" class="home">
+          <img
+            src="../../assets/img/services_page/Our_Services/Home.png"
+            alt=""
+            class="home-img"
+          />
+        </a>
+        <a href="" class="arrow">
+          <img
+            src="../../assets/img/services_page/Our_Services/Arrow.png"
+            alt=""
+            class="arrow-img"
+          />
+        </a>
+        <a href="" routerLink="/faq" class="service-link">
+          <h5 class="white-text-2">Image Gallery</h5>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="faq-div">
+    <div class="row row-without-gutter">
+      <div class="col-lg-12 col-12 custom-padding-right">
+        <div id="college-content-tab">
+          <div class="tabcontent">
+            <div class="row row-without-gutter relative-row">
+              <div class="container gallery">
+                <div class="container-box">
+                  <div *ngFor="let img of images">
+                    <img src="{{ img.cImageUrl }}" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
