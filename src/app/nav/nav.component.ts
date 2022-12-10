@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from "@angular/core";
 declare var $: any;
-import "zeynepjs";
 import { Router, NavigationEnd } from "@angular/router";
 @Component({
   selector: "app-nav",
@@ -52,6 +51,10 @@ export class NavComponent implements OnInit {
   showdiv29: any = false;
   checkoverlay: any;
   bgClass:any;
+  showMenu: boolean;
+  menuState: any;
+  menuToggle: any;
+  alreadyopened: boolean;
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       // filter `NavigationEnd` events
@@ -66,16 +69,56 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.zeynep = $(".zeynep").zeynep({
-       load: function () {
-         console.log("zeynepjs menu is successfully loaded");
-       },
-     });
+
+   // submenu-header
+   
+   this.alreadyopened = false; 
+   const submenuHeader = document.getElementsByClassName("submenu-header");
+   for (let i = 0; i < submenuHeader.length; i++) {
+    submenuHeader[i].addEventListener('click', function(e) {
+      e.stopPropagation();
+      const elementHeader = e.currentTarget as HTMLInputElement;
+      elementHeader.classList.add('raza');    
+      const submenuraza = document.getElementsByClassName("raza");
+     
+      this.alreadyopened = true; 
+      elementHeader.classList.add('alreadyopened');
+        elementHeader.closest('.opened').classList.remove('opened');   
+       
+    })
+   }
+    const classname = document.getElementsByClassName("has-submenu");
+    for (let i = 0; i < classname.length; i++) {
+      classname[i].addEventListener('click', function(e) {
+         
+          const element = e.currentTarget as HTMLInputElement  
+          var classList = 'classList' in element;
+          for (var i = 0; i < element.children.length; i++) {
+            var child = element.children[i];
+           // if (this.child.classList.contains == 'submenu') {
+               if (child.tagName == 'DIV' && this.alreadyopened!=true) {           
+              if (child.classList.contains('alreadyopened')) {  
+              }else{    
+                  child.classList.add('opened');                                  
+              } 
+            }
+          }
+        
+          
+      });
+  }
+      
+      
+    //  this.zeynep = $(".zeynep").zeynep({
+    //    load: function () {
+    //      console.log("zeynepjs menu is successfully loaded");
+    //    },
+    //  });
 
     
-     this.zeynep.on("closing", function () {
-       console.log("guys, the side menu is closing");
-     });
+    //  this.zeynep.on("closing", function () {
+    //    console.log("guys, the side menu is closing");
+    //  });
   }
   getHeaderStyle() {
     debugger;
@@ -1168,18 +1211,39 @@ export class NavComponent implements OnInit {
 
   mouseLeave3(event: any) {}
 
-  open() {
-    this.zeynep.open();
+ 
+
+  open() { 
+    this.menuToggle = document.getElementById('menuToggle');
+    if (this.menuToggle.classList.contains == 'opened') {
+      this.menuToggle.classList.remove('opened');
+    } else {
+      this.menuToggle.classList.add('opened');
+    }
+ 
+    
+    
+    
     if (typeof window != 'undefined' && window.document) {
       document.body.style.overflow = 'hidden';
   }
     this.checkoverlay = true;
   }
 
-  close() {
-    this.zeynep.close();
+  close() { 
+
+    this.menuToggle = document.getElementById('menuToggle');
+    if (this.menuToggle.classList.contains == 'opened') {
+      this.menuToggle.classList.add('opened');
+    } else {
+      this.menuToggle.classList.remove('opened');
+    }
+   // this.zeynep.close();
     document.body.style.overflow = 'unset';
     this.checkoverlay = false;
+   // this.zeynep.destroy()
+
+
   }
 
   getclass(data: any) {}

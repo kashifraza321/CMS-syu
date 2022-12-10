@@ -13,11 +13,7 @@ export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/syu/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-  const MockBrowser = require('mock- browser').mocks.MockBrowser;
-  const mock = new MockBrowser();
-  
-  global.document = mock.getDocument();
-  global.window = mock.getWindow();
+
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
