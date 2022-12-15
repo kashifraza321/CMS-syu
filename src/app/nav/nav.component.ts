@@ -78,8 +78,7 @@ export class NavComponent implements OnInit {
     submenuHeader[i].addEventListener('click', function(e) {
       e.stopPropagation();
       const elementHeader = e.currentTarget as HTMLInputElement;
-      elementHeader.classList.add('raza');    
-      const submenuraza = document.getElementsByClassName("raza");
+      
      
       this.alreadyopened = true; 
       elementHeader.classList.add('alreadyopened');
@@ -93,13 +92,14 @@ export class NavComponent implements OnInit {
          
           const element = e.currentTarget as HTMLInputElement  
           var classList = 'classList' in element;
+          var j=0;
           for (var i = 0; i < element.children.length; i++) {
-            var child = element.children[i];
-           // if (this.child.classList.contains == 'submenu') {
-               if (child.tagName == 'DIV' && this.alreadyopened!=true) {           
+            var child = element.children[i];      
+               if (child.tagName == 'DIV' && this.alreadyopened!=true && j==0) {           
               if (child.classList.contains('alreadyopened')) {  
               }else{    
-                  child.classList.add('opened');                                  
+                  child.classList.add('opened');     
+                  j++;                           
               } 
             }
           }
